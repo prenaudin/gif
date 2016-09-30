@@ -30,18 +30,29 @@
   </head>
   <body>
 
-    <div id="app">
-      <img src="" id='app-image'/>
+    <div id="app" v-on:click="nextImage">
+      <img v-bind:src="getImageSrc" id='app-image'/>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.27/vue.min.js"></script>
     <script type="text/javascript">
-      var images = [
-        'me/sausage.gif',
-        'me/dance.gif'
-      ];
-      var image = images[Math.floor(Math.random()*images.length)];
-      var imageEl = document.getElementById('app-image');
-      imageEl.src = image;
+      var images = ['sausage', 'dance', 'space'];
+      new Vue({
+        el: '#app',
+        data: {
+          imageId: 0,
+        },
+        methods: {
+          nextImage: function () {
+            this.imageId = this.imageId + 1 >= images.length ? 0 : this.imageId + 1;
+          }
+        },
+        computed: {
+          getImageSrc: function () {
+            return 'gifs/' + images[this.imageId] + '.gif';
+          }
+        }
+      });
     </script>
   </body>
 </html>
