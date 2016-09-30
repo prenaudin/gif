@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>GIFS</title>
+
+    <style media="screen">
+      body {
+        margin: 0;
+        background-color: #000;
+      }
+      #app {
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+      }
+      #app-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        min-width: 50%;
+        min-height: 50%;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="app">
+      <img src="" id='app-image'/>
+    </div>
+
+    <script type="text/javascript">
+      var images = [
+        'me/sausage.gif',
+        'me/dance.gif'
+      ];
+      var image = images[Math.floor(Math.random()*images.length)];
+      var imageEl = document.getElementById('app-image');
+      imageEl.src = image;
+    </script>
+  </body>
+</html>
