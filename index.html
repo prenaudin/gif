@@ -16,7 +16,7 @@
         width: 200%;
         height: 200%;
       }
-      #app-image {
+      #app-video {
         position: absolute;
         top: 0;
         left: 0;
@@ -31,16 +31,26 @@
   <body>
 
     <div id="app" v-on:click="nextImage">
-      <img v-bind:src="getImageSrc" id='app-image'/>
+      <audio id="app-audio" src="audio/jungle.wav" autoplay loop></audio>
+      <video id="app-video" v-bind:src="getImageSrc" playsinline autoplay muted loop></video>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.27/vue.min.js"></script>
     <script type="text/javascript">
       var images = ['sausage', 'dance', 'space'];
+      var getImageIdByName = function(name) {
+        return images.indexOf(name) || 0;
+      }
+
+      var defaultImageId = 0;
+      if (document.location.hash.length > 0) {
+        defaultImageId = getImageIdByName(document.location.hash.slice(1));
+      }
+
       new Vue({
         el: '#app',
         data: {
-          imageId: 0,
+          imageId: defaultImageId,
         },
         methods: {
           nextImage: function () {
@@ -49,7 +59,7 @@
         },
         computed: {
           getImageSrc: function () {
-            return 'gifs/' + images[this.imageId] + '.gif';
+            return 'gifs/' + images[this.imageId] + '.mp4';
           }
         }
       });
